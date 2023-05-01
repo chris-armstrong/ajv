@@ -527,6 +527,10 @@ export class CodeGen {
     return this
   }
 
+  ternary(condition: Code, thenBody: Code, elseBody: Code): Code {
+    return _`${condition} ? ${thenBody} : ${elseBody}`
+  }
+
   // returns code for object literal for the passed argument list of key-value pairs
   object(...keyValues: [Name | string, SafeExpr | string][]): _Code {
     const code: CodeItem[] = ["{"]

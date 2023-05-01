@@ -89,12 +89,7 @@ export function extendErrors({
 
 function addError(gen: CodeGen, errObj: Code): void {
   const err = gen.const("err", errObj)
-  gen.if(
-    _`${N.vErrors} === null`,
-    () => gen.assign(N.vErrors, _`[${err}]`),
-    _`${N.vErrors}.push(${err})`
-  )
-  gen.code(_`${N.errors}++`)
+  gen.code(_`${N.addError}(${err})`)
 }
 
 function returnErrors(it: SchemaCxt, errs: Code): void {

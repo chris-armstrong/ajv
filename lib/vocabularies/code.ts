@@ -48,7 +48,7 @@ export function propertyInData(
   property: Name | string,
   ownProperties?: boolean
 ): Code {
-  const cond = _`${data}${getProperty(property)} !== undefined`
+  const cond = _`${N.isDefined}(${data}${getProperty(property)})`
   return ownProperties ? _`${cond} && ${isOwnProperty(gen, data, property)}` : cond
 }
 
@@ -58,7 +58,7 @@ export function noPropertyInData(
   property: Name | string,
   ownProperties?: boolean
 ): Code {
-  const cond = _`${data}${getProperty(property)} === undefined`
+  const cond = _`!${N.isDefined}(${data}${getProperty(property)})`
   return ownProperties ? or(cond, not(isOwnProperty(gen, data, property))) : cond
 }
 

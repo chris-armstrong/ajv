@@ -96,6 +96,23 @@ function topSchemaObjCode(it: SchemaObjCxt): void {
     checkNoDefault(it)
     gen.let(N.vErrors, null)
     gen.let(N.errors, 0)
+    gen.func(N.addError, _`err`, false, () => {
+      gen.assign(
+        N.vErrors,
+        gen.ternary(_`${N.vErrors} === null`, _`[err]`, _`${N.vErrors}.concat(err)`)
+      )
+      gen.code(_`${N.errors}++`)
+    })
+    gen.func(N.addErrorsFrom, _`errs`, false, () => {
+      gen.assign(
+        N.vErrors,
+        gen.ternary(_`${N.vErrors} === null`, _`errs`, _`${N.vErrors}.concat(errs)`)
+      )
+      gen.assign(N.errors, _`${N.vErrors}.length`)
+    })
+    gen.func(N.isDefined, _`x`, false, () => {
+      gen.return(_`x !== undefined`)
+    })
     if (opts.unevaluated) resetEvaluated(it)
     typeAndKeywords(it)
     returnResults(it)

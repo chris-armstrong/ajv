@@ -22,6 +22,11 @@ const names = {
   jsonPos: new Name("jsonPos"),
   jsonLen: new Name("jsonLen"),
   jsonPart: new Name("jsonPart"),
+  // Helper functions
+  addError: new Name("addError"),
+  addErrorsFrom: new Name("addErrorsFrom"),
+  makeErrorObject: new Name("makeErrorObject"),
+  isDefined: new Name("isDefined"),
 }
 
 export default names

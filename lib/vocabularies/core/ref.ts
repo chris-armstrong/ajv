@@ -95,8 +95,7 @@ export function callRef(cxt: KeywordCxt, v: Code, sch?: SchemaEnv, $async?: bool
 
   function addErrorsFrom(source: Code): void {
     const errs = _`${source}.errors`
-    gen.assign(N.vErrors, _`${N.vErrors} === null ? ${errs} : ${N.vErrors}.concat(${errs})`) // TODO tagged
-    gen.assign(N.errors, _`${N.vErrors}.length`)
+    gen.code(_`${N.addErrorsFrom}(${errs})`)
   }
 
   function addEvaluatedFrom(source: Code): void {
